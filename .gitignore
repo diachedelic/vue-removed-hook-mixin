@@ -1,0 +1,5 @@
+.DS_Store
+node_modules
+dist/*.gz
+dist/*.map
+yarn-error.log
