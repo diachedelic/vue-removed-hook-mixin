@@ -1,5 +1,5 @@
 /*!
-  * vue-removed-hook-mixin v0.0.1
+  * vue-removed-hook-mixin v0.0.3
   * (c) 2019 James Diacono
   * @license MIT
   */
@@ -9,17 +9,35 @@ var index = {
   destroyed: function destroyed() {
     var this$1 = this;
 
-    var timer = setInterval(function () {
-      if (document.body.contains(this$1.$el)) {
-        // element not yet removed from component
-        return
-      }
-
+    var removed = function () {
       // quick and dirty version of Vue's lifecycle callHook method
       this$1.$options.removed.call(this$1);
+    };
 
-      clearInterval(timer);
-    }, 25);
+    // element was immediately detached from DOM (no transition)
+    if (!this.$el.offsetParent) {
+      removed();
+      return
+    }
+
+    var mutationHandler = function (mutations, observer) {
+      for (var i = 0; i < mutations.length; i++) {
+        var ref = mutations[i];
+        var removedNodes = ref.removedNodes;
+
+        for (var j = 0; j < removedNodes.length; j++) {
+          if (removedNodes[j] === this$1.$el) {
+            observer.disconnect();
+            removed();
+          }
+        }
+      }
+    };
+
+    // start observing parent element for changes to the DOM
+    var observer = new MutationObserver(mutationHandler);
+
+    observer.observe(this.$parent.$el, { childList: true });
   },
 }
 
