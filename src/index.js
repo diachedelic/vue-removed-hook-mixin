@@ -2,16 +2,31 @@
 // is fully removed from the DOM
 export default {
   destroyed() {
-    const timer = setInterval(() => {
-      if (document.body.contains(this.$el)) {
-        // element not yet removed from component
-        return
-      }
-
+    const removed = () => {
       // quick and dirty version of Vue's lifecycle callHook method
       this.$options.removed.call(this)
+    }
 
-      clearInterval(timer)
-    }, 25)
+    // element was immediately detached from DOM (no transition)
+    if (!this.$el.offsetParent) {
+      removed()
+      return
+    }
+
+    const mutationHandler = (mutations, observer) => {
+      for (const mutation of mutations) {
+        for (const node of mutation.removedNodes) {
+          if (node === this.$el) {
+            observer.disconnect()
+            removed()
+          }
+        }
+      }
+    }
+
+    // start observing parent element for changes to the DOM
+    const observer = new MutationObserver(mutationHandler)
+
+    observer.observe(this.$parent.$el, { childList: true })
   },
 }
