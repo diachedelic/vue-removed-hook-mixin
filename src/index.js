@@ -14,9 +14,11 @@ export default {
     }
 
     const mutationHandler = (mutations, observer) => {
-      for (const mutation of mutations) {
-        for (const node of mutation.removedNodes) {
-          if (node === this.$el) {
+      for (let i = 0; i < mutations.length; i++) {
+        const { removedNodes } = mutations[i]
+
+        for (let j = 0; j < removedNodes.length; j++) {
+          if (removedNodes[j] === this.$el) {
             observer.disconnect()
             removed()
           }
