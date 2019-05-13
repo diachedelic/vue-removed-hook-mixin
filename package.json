@@ -1,6 +1,6 @@
 {
   "name": "vue-removed-hook-mixin",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Adds a `removed` hook to components, signalling removal from DOM",
   "keywords": [
     "vue"
