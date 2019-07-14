@@ -3,3 +3,4 @@ node_modules
 dist/*.gz
 dist/*.map
 yarn-error.log
+yarn.lock
