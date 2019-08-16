@@ -26,7 +26,7 @@
   "scripts": {
     "build": "node build/build.js",
     "lint": "eslint src test",
-    "preversion": "npm run build"
+    "preversion": "npm run build && git add ."
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
