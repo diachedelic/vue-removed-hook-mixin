@@ -25,7 +25,8 @@
   "module": "dist/vue-removed-hook-mixin.esm.js",
   "scripts": {
     "build": "node build/build.js",
-    "lint": "eslint src test"
+    "lint": "eslint src test",
+    "preversion": "npm run build"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
