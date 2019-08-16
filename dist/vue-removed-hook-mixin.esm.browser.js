@@ -1,5 +1,5 @@
 /*!
-  * vue-removed-hook-mixin v0.0.3
+  * vue-removed-hook-mixin v0.0.4
   * (c) 2019 James Diacono
   * @license MIT
   */
@@ -23,7 +23,7 @@ var index = {
         const { removedNodes } = mutations[i];
 
         for (let j = 0; j < removedNodes.length; j++) {
-          if (removedNodes[j] === this.$el) {
+          if (removedNodes[j].contains(this.$el)) {
             observer.disconnect();
             removed();
           }
@@ -34,7 +34,10 @@ var index = {
     // start observing parent element for changes to the DOM
     const observer = new MutationObserver(mutationHandler);
 
-    observer.observe(this.$parent.$el, { childList: true });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
   },
 }
 
