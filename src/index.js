@@ -30,7 +30,7 @@ export default {
     const observer = new MutationObserver(mutationHandler)
 
     observer.observe(document.body, {
-      childList: true
+      childList: true,
       subtree: true,
     })
   },
