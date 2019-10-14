@@ -8,7 +8,7 @@ export default {
     }
 
     // element was immediately detached from DOM (no transition)
-    if (!this.$el.offsetParent) {
+    if (!document.body.contains(this.$el)) {
       removed()
       return
     }
