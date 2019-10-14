@@ -1,5 +1,5 @@
 /*!
-  * vue-removed-hook-mixin v0.0.4
+  * vue-removed-hook-mixin v0.1.0
   * (c) 2019 James Diacono
   * @license MIT
   */
@@ -15,7 +15,7 @@ var index = {
     };
 
     // element was immediately detached from DOM (no transition)
-    if (!this.$el.offsetParent) {
+    if (!document.body.contains(this.$el)) {
       removed();
       return
     }
