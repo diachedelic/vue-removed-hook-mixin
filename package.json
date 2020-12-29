@@ -1,7 +1,7 @@
 {
   "name": "vue-removed-hook-mixin",
   "version": "0.1.1",
-  "description": "Adds a `removed` hook to components, signalling removal from DOM",
+  "description": "Adds a 'removed' hook to components, signalling removal from DOM",
   "keywords": [
     "vue"
   ],
@@ -25,7 +25,6 @@
   "module": "dist/vue-removed-hook-mixin.esm.js",
   "scripts": {
     "build": "node build/build.js",
-    "lint": "eslint src test",
     "preversion": "npm run build && git add ."
   },
   "devDependencies": {

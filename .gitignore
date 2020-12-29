@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-dist/*.gz
-dist/*.map
+dist
 yarn-error.log
 yarn.lock
